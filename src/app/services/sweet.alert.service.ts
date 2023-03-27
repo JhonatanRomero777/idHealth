@@ -19,11 +19,21 @@ export class SweetAlertService {
     });
   }
 
-  public errorMsg(title: string, text: string) {
+  public errorMsg(text: string, title: string = "Error!") {
     Swal.fire({
       icon: 'error',
       title: title,
       text: text,
     })
+  }
+
+  public deleteConfirm(text: string, title: string = "Se eliminará:"){
+    return Swal.fire({
+      title: title,
+      text: text,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Continuar'
+    });
   }
 }

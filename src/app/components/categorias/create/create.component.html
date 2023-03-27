@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-12 categories">
+
+        <input class="form-control" type="text" placeholder="Nombre" #categoryName>
+
+        <button *ngIf="!$category" class="btn btn-success centerBtn"
+            (click)="loadingSearch=true; search(categoryName.value)">
+            <b> Search </b>
+            <i *ngIf="loadingSearch, else noChargingSearch" class="fa fa-refresh fa-lg fa-spin"></i>
+            <ng-template #noChargingSearch>
+                <i class="fa-lg bi bi-search"></i>
+            </ng-template>
+        </button>
+
+        <button *ngIf="!$category; else updateBtn" class="btn btn-round my-bg-primary centerBtn"
+            (click)="loadingCreate=true; create(categoryName.value)">
+            Crear
+            <i *ngIf="loadingCreate, else noChargingCreate" class="fa fa-refresh fa-lg fa-spin"></i>
+            <ng-template #noChargingCreate>
+                <i class="fa fa-lg fa-plus"></i>
+            </ng-template>
+        </button>
+
+        <ng-template #updateBtn>
+            <button class="btn btn-round my-bg-primary centerBtn"
+                (click)="loadingUpdate=true; updateCategory()">
+                Actualizar
+                <i *ngIf="loadingUpdate, else noChargingUpdate" class="fa fa-refresh fa-lg fa-spin"></i>
+                <ng-template #noChargingUpdate>
+                    <i class="fa-lg bi bi-pencil-square"></i>
+                </ng-template>
+            </button>
+        </ng-template>
+
+        <button *ngIf="cancelar || $category" class="btn btn-round bg-danger cancel"
+        (click)="reset()">
+            <i class="fa-lg bi bi-slash-circle"></i>
+        </button>
+    </div>
+</div>

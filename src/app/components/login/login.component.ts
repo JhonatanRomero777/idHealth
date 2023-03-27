@@ -41,7 +41,7 @@ export class LoginComponent implements OnDestroy {
         this.loading = false;
       },
       (error) => {
-        this.sweetAlertService.errorMsg("Error!", error.error.msg);
+        this.sweetAlertService.errorMsg(error.error.msg);
         this.loading = false;
       });
   }

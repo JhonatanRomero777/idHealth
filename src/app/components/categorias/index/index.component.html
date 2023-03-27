@@ -1,1 +1,24 @@
-<p>index CATEGORIA works!</p>
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-12 text-center main_title title">
+                <h3> Categorias </h3>
+            </div>
+        </div>
+
+        <app-create #createCategory
+        (nameOutput)="indexCategory.setCategories($event);"
+        (resetOutput)="indexCategory.reset()">
+
+        </app-create>
+
+    </div>
+    
+    <div class="card-body">
+        <app-categorias #indexCategory
+        (editOutput)="createCategory.edit($event)"
+        (deleteOutput)="createCategory.delete($event)">
+        </app-categorias>
+    </div>
+</div>

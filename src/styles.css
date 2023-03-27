@@ -33,6 +33,32 @@ html {
     color: white;
 }
 
+.my-bg-primary:hover{
+    color: white;
+}
+
 .font-weight-bold {
+    font-weight: bold;
+}
+
+.main_title {
+    text-align: center;
+    font-size: 4vw;
+    font-family: var(--font_primary);
+}
+
+.centerBtn{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cancel{
+    color: white;
+    font-weight: bold;
+}
+
+.cancel:hover{
+    color: white;
     font-weight: bold;
 }
