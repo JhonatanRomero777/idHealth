@@ -1,0 +1,16 @@
+<ngx-datatable
+    class="bootstrap"
+    [headerHeight]="50"
+    [columnMode]="'force'"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [rows]="$products"
+    [limit]="3">
+
+    <ngx-datatable-column name="Id" prop="_id" headerClass="font-weight-bold">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Nombre" prop="nombre" headerClass="font-weight-bold">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Precio" prop="precio" headerClass="font-weight-bold">
+    </ngx-datatable-column>
+</ngx-datatable>

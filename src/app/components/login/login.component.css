@@ -1,0 +1,51 @@
+.login-background-img {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    filter: brightness(30%);
+    background-image: url("/assets/login/background.jpg");
+}
+
+.login-header {
+    position: absolute;
+    width: 100vw; height: 15%;
+    color: aliceblue;
+    padding-top: 2vw;
+    padding-right: 2vw;
+}
+
+.login-txt {
+    margin-right: 0.5vw;
+}
+
+.login-body {
+    position: absolute;
+    top: 15%; left: 0%;
+    width: 100vw; height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-footer {
+    position: absolute;
+    top: 85%; left: 0%;
+    width: 100vw; height: 15%;
+}
+
+.login-card {
+    width: 60%;
+    border-radius: 30px;
+}
+
+.login-form {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.login-card-title {
+    text-align: center;
+    font-size: 4vw;
+    font-family: var(--font_primary);
+}

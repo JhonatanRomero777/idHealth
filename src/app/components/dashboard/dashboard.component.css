@@ -1,0 +1,9 @@
+.title{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.myProducts{
+    display: flex;
+    gap: 20px;
+}

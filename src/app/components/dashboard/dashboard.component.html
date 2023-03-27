@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <app-search></app-search>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+    </div>
+</div>
+
+<br><br>
+
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-12 text-center title">
+                <h3> Mis Productos </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 myProducts">
+                <select class="form-select" name="" id="">
+                    <option value="">Seleccione categoría...</option>
+                </select>
+
+                <input class="form-control" type="text" placeholder="Nombre">
+
+                <button class="btn btn-round my-bg-primary">
+                    CREAR 
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-body">
+
+        <ngx-datatable
+            class="bootstrap"
+            [headerHeight]="50"
+            [columnMode]="'force'"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [rows]="$products"
+            [limit]="3">
+
+            <ngx-datatable-column name="Id" prop="_id" headerClass="font-weight-bold">
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Nombre" prop="nombre" headerClass="font-weight-bold">
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Precio" prop="precio" headerClass="font-weight-bold">
+            </ngx-datatable-column>
+        </ngx-datatable>
+        
+    </div>
+</div>

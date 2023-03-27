@@ -1,0 +1,41 @@
+<nav *ngIf="$user" class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+
+        <div class="text-start perfil">
+            <img src="assets/login/logo.png" width="50">
+            <h5> Bienvenido: {{$user.nombre}} </h5>
+        </div>
+
+        <div class="text-end" id="navbarSupportedContent">
+            
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <div *ngFor="let menuItem of $menuItems">
+                    <li routerLinkActive="active" *ngIf="menuItem.allow.includes($user.rol)"
+                        class="nav-item">
+                        <a [class]="(menuItem.active) ? 'nav-link active' : 'nav-link'"
+                            [routerLink]="['/dashboard' + menuItem.path]" (click)="activar(menuItem)">
+                            <p>{{menuItem.title}}</p>
+                        </a>
+                    </li>
+                </div>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li>
+                            <a class="dropdown-item" (click)="authService.logout(); routeService.goToLogin();">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+</nav>

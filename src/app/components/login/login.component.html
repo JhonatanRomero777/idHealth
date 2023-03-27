@@ -1,1 +1,74 @@
-<p>login works!</p>
+<!-- Background Img -->
+<div class="full-img login-background-img">
+</div>
+
+<!-- LOGIN Header -->
+<div class="login-header text-end">
+    <div class="row">
+        <div class="col-md-12">
+            <h5> <b class="login-txt">LOGIN</b> <i class="bi bi-person-circle fa-4x"></i> </h5>
+        </div>
+    </div>
+</div>
+
+<!-- LOGIN Body -->
+<div class="login-body">
+
+    <div class="card login-card">
+    
+        <div class="card-header"></div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-5">
+                    <img src="assets/login/logo.png" width="100%" height="85%">
+                </div>
+                
+                <div class="col-md-6">
+
+                    <h3 class="card-title login-card-title text-ptimary">BIENVENIDO</h3>
+
+                    <form [formGroup]="loginForm" (ngSubmit)="this.loading = true; signIn()">
+                        <div class="form-group">
+                            <label class="font-weight-bold"> Correo </label>
+                            <input type="text" class="form-control" formControlName="correo">
+                            <app-form-error-msg [myFormControl]="loginForm.get('correo')"></app-form-error-msg>
+                        </div>
+                
+                        <div class="form-group">
+                            <label class="font-weight-bold"> Contraseña </label>
+                            <input type="password" class="form-control" formControlName="password">
+                            <app-form-error-msg
+                                [myFormControl]="loginForm.get('password')">
+                            </app-form-error-msg>
+                        </div>
+
+                        <br>
+                
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-round login-btn my-bg-primary"
+                            [disabled]="loginForm.invalid">
+                                Login <i *ngIf="loading" class="fa fa-refresh fa-lg fa-spin"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+</div>
+
+<!-- LOGIN Footer -->
+<div class="login-footer">
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+    </div>
+</div>

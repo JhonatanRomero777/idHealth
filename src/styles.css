@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'node_modules/@swimlane/ngx-datatable/index.css';
+@import 'node_modules/@swimlane/ngx-datatable/assets/icons.css';
+@import 'node_modules/@swimlane/ngx-datatable/themes/bootstrap.css';
+
+@font-face {
+    font-family: insaniburger;
+    src: url(assets/fonts/insaniburger/Insanibu.ttf);
+}
+
+/** BOOTSTRAP **/
+.container{
+    margin-top: 72px;
+}
+/** /BOOTSTRAP/ **/
+
+.card-header{ border-color: transparent; }
+
+.full-img {
+    background-size: 100% 100%;
+}
+
+html {
+    --font_primary: insaniburger;
+    --font_secondary: 'Montserrat';
+
+    --color_primary: #f96332;
+}
+
+.my-bg-primary{
+    background-color: var(--color_primary);
+    font-weight: bolder;
+    color: white;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
