@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 import { RouteService } from 'src/app/services/route.service';
 import { SweetAlertService } from 'src/app/services/sweet.alert.service';
 import { UserService } from 'src/app/services/user.service';
@@ -77,12 +78,9 @@ export class UpdateComponent implements OnInit, OnDestroy {
 
   update(){
 
-    //this.userService.getUser().correo !== this.updateForm.value.correo
-    if(true){
+    this.userService.setUser(this.updateForm.value as Usuario);
 
-      this.userService.setUser(this.updateForm.value as Usuario);
-
-      this.$userUpdateSubscription = this.userService.update().subscribe(
+    this.$userUpdateSubscription = this.userService.update().subscribe(
       (result)=>{          
         
         if(this.$uid) this.refresh();
@@ -96,12 +94,7 @@ export class UpdateComponent implements OnInit, OnDestroy {
         console.log(error);
         this.sweetAlertService.errorMsg(error.error.msg);
         this.loadingUpdate = false;
-      });
-    }
-    else{
-      this.loadingUpdate = false;
-      this.reset();
-    }
+    });
   }
 
   reset(){ this.routeService.goToDashboard('usuarios'); }

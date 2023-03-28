@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
 import { Usuario } from 'src/app/models/usuario';
 import { Router } from '@angular/router';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 declare interface RouteInfo {
   path: string;
@@ -42,11 +43,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private $roleSubscription: Subscription;
   private $path: any;
 
-  constructor(public authService: AuthService, public routeService: RouteService,
+  constructor(private navBarService: NavbarService,
+              public authService: AuthService, public routeService: RouteService,
               private userService: UserService, private router: Router){}
 
   ngOnInit(){
+    this.navBarService.setNavbarComponent(this);
+    this.reset();
+  }
 
+  reset(){
+  
     this.$path = new URL(window.location.href).pathname.split("/").reverse()[0];
     
     for(let i=0; i<this.$menuItems.length; i++){
