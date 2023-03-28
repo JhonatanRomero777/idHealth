@@ -14,9 +14,11 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnDestroy {
 
+  //jhonatanAdmin@hotmail.com
+  //hola1234
   loginForm = this.fb.group({
-    correo: ['jhonatanAdmin@hotmail.com', [Validators.required, Validators.email]],
-    password: ['hola1234', Validators.required]
+    correo: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
   });
 
   loading: boolean = false;
