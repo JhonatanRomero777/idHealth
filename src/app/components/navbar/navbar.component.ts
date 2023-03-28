@@ -38,14 +38,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
       allow: [environment.roles[0]] },
   ];
 
-  $roleSubscription: Subscription;
+  private $roleSubscription: Subscription;
 
   constructor(public authService: AuthService, public routeService: RouteService,
               private userService: UserService){}
 
   ngOnInit(){
 
-    this.$roleSubscription = this.userService.getUsers().subscribe((response)=>{
+    this.$roleSubscription = this.userService.index().subscribe((response)=>{
 
       if(response.usuarios){
 

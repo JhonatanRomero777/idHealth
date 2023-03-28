@@ -14,7 +14,7 @@ import { SweetAlertService } from 'src/app/services/sweet.alert.service';
 export class LoginComponent implements OnDestroy {
 
   loginForm = this.fb.group({
-    correo: ['jhonatanU@hotmail.com', [Validators.required, Validators.email]],
+    correo: ['jhonatanAdmin@hotmail.com', [Validators.required, Validators.email]],
     password: ['hola1234', Validators.required]
   });
 

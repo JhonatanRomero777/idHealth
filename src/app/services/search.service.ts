@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Categoria } from '../models/categoria';
 import { Producto } from '../models/producto';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,11 @@ export class SearchService {
 
     return this.http.get<{results: Producto[]}>
       (environment.backendURL + this.api + "productos/" + $search);
+  }
+
+  public usuarios($search: string){
+
+    return this.http.get<{results: Usuario[]}>
+      (environment.backendURL + this.api + "usuarios/" + $search);
   }
 }

@@ -5,6 +5,7 @@
         <app-select (categoryOutput)="$category = $event; categoryOutput.emit($event)"></app-select>
 
         <input class="form-control" type="text" placeholder="Nombre" #productName>
+        <input class="form-control" type="number" placeholder="Precio" #productPrecio>
 
         <button *ngIf="!$product" class="btn btn-success centerBtn"
             (click)="loadingSearch=true; search(productName.value)">
@@ -16,7 +17,7 @@
         </button>
 
         <button *ngIf="!$product; else updateBtn" class="btn btn-round my-bg-primary centerBtn"
-            (click)="loadingCreate=true; create(productName.value)">
+            (click)="loadingCreate=true; create(productName.value, productPrecio.value)">
             Crear
             <i *ngIf="loadingCreate, else noChargingCreate" class="fa fa-refresh fa-lg fa-spin"></i>
             <ng-template #noChargingCreate>

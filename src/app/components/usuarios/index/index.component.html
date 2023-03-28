@@ -1,1 +1,24 @@
-<p>index USERS works!</p>
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-12 text-center main_title title">
+                <h3> Usuarios </h3>
+            </div>
+        </div>
+
+        <app-actions #userActions
+        (usuarioOutput)="userIndex.setUsers($event);"
+        (resetOutput)="userIndex.reset()">
+        </app-actions>
+
+    </div>
+    
+    <div class="card-body">
+        <!-- (editOutput)="userActions.edit($event)"
+         -->
+        <app-usuarios #userIndex
+        (deleteOutput)="userActions.delete($event)">
+        </app-usuarios>
+    </div>
+</div>

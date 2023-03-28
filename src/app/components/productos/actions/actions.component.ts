@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
 import { ProductService } from 'src/app/services/product.service';
@@ -21,6 +22,7 @@ export class ActionsComponent  {
   @Input() $userId: string;
 
   @ViewChild("productName") InputName: any;
+  @ViewChild("productPrecio") InputPrecio: any;
   @ViewChild(SelectComponent) categorySelect: SelectComponent;
   
   loadingCreate: boolean = false;
@@ -32,12 +34,22 @@ export class ActionsComponent  {
   public $category: Categoria;
   public $current_category: Categoria;
 
+  private $productSearchSubscription: Subscription;
+  private $productCreateSubscription: Subscription;
+  private $productUpdateSubscription: Subscription;
+
   constructor(private sweetAlertService: SweetAlertService, private searchService: SearchService,
               private productService: ProductService){}
 
+  ngOnDestroy() {
+    if(this.$productSearchSubscription) this.$productSearchSubscription.unsubscribe();
+    if(this.$productCreateSubscription) this.$productCreateSubscription.unsubscribe();
+    if(this.$productUpdateSubscription) this.$productUpdateSubscription.unsubscribe();
+  }
+
   search($name: string){
     if($name){
-      this.searchService.productos($name).subscribe(
+      this.$productSearchSubscription = this.searchService.productos($name).subscribe(
         (result)=>{          
           if(result.results.length > 0){
 
@@ -62,11 +74,12 @@ export class ActionsComponent  {
     }
   }
 
-  create($name: string){
+  create($name: string, $precio: string){
     if($name){
 
       if(this.$category){
-        this.productService.create($name, this.$category._id).subscribe(
+        this.$productCreateSubscription = this.productService.create($name, $precio, this.$category._id)
+        .subscribe(
           (result)=>{          
             this.reset();
             this.loadingCreate = false;
@@ -91,6 +104,7 @@ export class ActionsComponent  {
 
   reset(){
     this.InputName.nativeElement.value = "";
+    this.InputPrecio.nativeElement.value = "";
     this.resetOutput.emit(true);
     this.cancelar = false;
     this.$product = null;
@@ -108,22 +122,26 @@ export class ActionsComponent  {
     this.categorySelect.setCategory(this.$category);
 
     this.InputName.nativeElement.value = this.$product.nombre;
+    this.InputPrecio.nativeElement.value = this.$product.precio;
   }
 
   updateProduct(){
     if(this.$category){
 
-      if(this.InputName.nativeElement.value){
+      if(this.InputName.nativeElement.value && this.InputPrecio.nativeElement.value){
 
         if(this.InputName.nativeElement.value === this.$product.nombre
+            && this.InputPrecio.nativeElement.value === this.$product.precio
             && this.$current_category._id === this.$category._id){
           this.loadingUpdate = false;
           this.reset();
         }
         else {
           this.$product.nombre = this.InputName.nativeElement.value;
+          this.$product.precio = this.InputPrecio.nativeElement.value;
   
-          this.productService.update(this.$product, this.$category._id).subscribe(
+          this.$productUpdateSubscription = this.productService
+          .update(this.$product, this.$category._id).subscribe(
             (result)=>{          
               this.reset();
               this.loadingUpdate = false;

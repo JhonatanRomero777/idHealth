@@ -19,10 +19,11 @@ export class ProductService {
       (environment.backendURL + this.api, this.interceptorService.allListParameter());
   }
 
-  public create($name: string, $category: string){
+  public create($name: string, $precio: string, $category: string){
 
     let data = {
       nombre: $name,
+      precio: $precio,
       categoria: $category
     };
 
@@ -34,6 +35,7 @@ export class ProductService {
 
     let data = {
       nombre: $product.nombre,
+      precio: $product.precio,
       categoria: $category
     };
 

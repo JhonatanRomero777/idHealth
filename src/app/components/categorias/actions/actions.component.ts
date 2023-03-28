@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoryService } from 'src/app/services/category.service';
 import { SearchService } from 'src/app/services/search.service';
@@ -9,7 +10,7 @@ import { SweetAlertService } from 'src/app/services/sweet.alert.service';
   templateUrl: './actions.component.html',
   styleUrls: ['./actions.component.css']
 })
-export class ActionsComponent  {
+export class ActionsComponent implements OnDestroy  {
 
   @Output() nameOutput = new EventEmitter<Categoria[]>();
   @Output() resetOutput = new EventEmitter<boolean>();
@@ -23,12 +24,23 @@ export class ActionsComponent  {
 
   public $category: Categoria;
 
+  private $categorySearchSubscription: Subscription;
+  private $categoryCreateSubscription: Subscription;
+  private $categoryUpdateSubscription: Subscription;
+
   constructor(private sweetAlertService: SweetAlertService, private searchService: SearchService,
               private categoryService: CategoryService){}
 
+  ngOnDestroy() {
+    if(this.$categorySearchSubscription) this.$categorySearchSubscription.unsubscribe();
+    if(this.$categoryCreateSubscription) this.$categoryCreateSubscription.unsubscribe();
+    if(this.$categoryUpdateSubscription) this.$categoryUpdateSubscription.unsubscribe();
+  }
+
+
   search($name: string){
     if($name){
-      this.searchService.categorias($name).subscribe(
+      this.$categorySearchSubscription =  this.searchService.categorias($name).subscribe(
         (result)=>{          
           if(result.results.length > 0){
             this.nameOutput.emit(result.results);
@@ -47,7 +59,7 @@ export class ActionsComponent  {
 
   create($name: string){
     if($name){
-      this.categoryService.create($name).subscribe(
+      this.$categoryCreateSubscription = this.categoryService.create($name).subscribe(
         (result)=>{          
           this.reset();
           this.loadingCreate = false;
@@ -87,7 +99,7 @@ export class ActionsComponent  {
 
         this.$category.nombre = this.InputName.nativeElement.value;
 
-        this.categoryService.update(this.$category).subscribe(
+        this.$categoryUpdateSubscription = this.categoryService.update(this.$category).subscribe(
           (result)=>{          
             this.reset();
             this.loadingUpdate = false;
@@ -106,16 +118,15 @@ export class ActionsComponent  {
     }
   }
 
-  delete($category: Categoria){
+  delete ($category: Categoria){
 
     let categoryService = this.categoryService;
     let me = this;
 
     this.sweetAlertService.deleteConfirm("Categoría = " + $category.nombre).then(
-      function(result) {
+      async function(result) {
 
         if (result.value) {
-
           categoryService.delete($category).subscribe(
           (result)=>{          
             me.reset();
@@ -125,7 +136,6 @@ export class ActionsComponent  {
           (error) => {
             me.sweetAlertService.errorMsg(error.error.msg);
           });
-
         }  
     });
   }

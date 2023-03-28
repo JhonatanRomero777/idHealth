@@ -19,7 +19,7 @@ export class Role1Guard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-    return this.userService.getUsers().pipe(
+    return this.userService.index().pipe(
       map( (response): boolean => {
 
         if(response.usuarios){

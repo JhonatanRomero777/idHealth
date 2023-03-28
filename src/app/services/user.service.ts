@@ -1,7 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../models/usuario';
+import { UsuarioCreate } from '../models/usuario.create';
+import { InterceptorService } from './interceptor.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +12,29 @@ export class UserService {
 
   private api = "api/usuarios/";
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private interceptorService: InterceptorService){}
 
-  public getUsers(){
+  public index(){
 
-    let params = new HttpParams();
-
-    params = params.append('desde', 0);
-    params = params.append('limite', 0);
-    
     return this.http.get<{total: number, usuarios:Usuario[]}>
-      (environment.backendURL + this.api, { params: params });
+      (environment.backendURL + this.api, this.interceptorService.allListParameter());
+  }
+
+  public create(data: UsuarioCreate){
+
+    return this.http.post<{usuario: Usuario}>
+    (environment.backendURL + this.api, data, this.interceptorService.tokenHeader());
+  }
+
+  public update(data: UsuarioCreate, userId: string){
+
+    return this.http.put<Usuario>
+    (environment.backendURL + this.api + userId, data, this.interceptorService.tokenHeader());
+  }
+
+  public delete(user: Usuario){
+
+    return this.http.delete<Usuario>
+    (environment.backendURL + this.api + user.uid, this.interceptorService.tokenHeader());
   }
 }
