@@ -1,0 +1,92 @@
+<div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-12 text-center main_title title">
+            <h3 *ngIf="!$uid; else register"> Actualizar usuario
+                <button style="margin-left: 10px" class="btn btn-round bg-danger cancel"
+                (click)="reset()">
+                  <i class="fa-lg bi bi-slash-circle"></i>
+                </button>
+            </h3>
+            <ng-template #register> Perfil 
+                <button style="margin-left: 10px" class="btn btn-round bg-danger cancel"
+                (click)="refresh()">
+                  <i class="fa-lg bi bi-slash-circle"></i>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="updateForm" (ngSubmit)="loadingUpdate = true; update()">
+  
+        <div class="row invisible">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="font-weight-bold"> ID </label>
+                    <input type="text" class="form-control" formControlName="uid">
+                    <app-form-error-msg [myFormControl]="updateForm.get('uid')"></app-form-error-msg>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="font-weight-bold"> Nombre </label>
+              <input type="text" class="form-control" formControlName="nombre">
+              <app-form-error-msg [myFormControl]="updateForm.get('nombre')"></app-form-error-msg>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="font-weight-bold"> Correo </label>
+              <input type="text" class="form-control" formControlName="correo">
+              <app-form-error-msg [myFormControl]="updateForm.get('correo')"></app-form-error-msg>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="font-weight-bold"> Si desea cambiar contraseña por favor introduce una nueva, de lo contrario por favor dejar este campo vacío </label>
+                    <input type="password" class="form-control" formControlName="password">
+                    <app-form-error-msg
+                        [myFormControl]="updateForm.get('password')">
+                    </app-form-error-msg>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div [class]="($uid) ? 'form-group invisible' : 'form-group'">
+              <label class="font-weight-bold"> Rol </label>
+              <select class="form-select" formControlName="rol">
+                <option *ngFor="let role of $roles" [ngValue]="role">
+                 {{ role }}
+                </option>
+              </select> 
+              <app-form-error-msg [myFormControl]="updateForm.get('rol')"></app-form-error-msg>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="text-end">
+                <button type="submit" class="btn btn-round login-btn my-bg-primary"
+                [disabled]="updateForm.invalid" style="margin-top: 25px;">
+                  Actualizar <i *ngIf="loadingUpdate" class="fa fa-refresh fa-lg fa-spin"></i>
+                </button>
+            </div>
+          </div>
+        </div>
+      
+      </form>
+    </div>
+</div>

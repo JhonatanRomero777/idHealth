@@ -25,7 +25,11 @@
                         Actions
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li>
+                            <a class="dropdown-item" (click)="routeService.goToDashboard('usuarios/perfil')">
+                                Perfil
+                            </a>
+                        </li>
                         <li>
                             <a class="dropdown-item" (click)="authService.logout(); routeService.goToLogin();">
                                 Logout

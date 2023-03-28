@@ -49,8 +49,11 @@ export class CreateComponent implements OnInit, OnDestroy {
 
     if(this.$userCreate){
       this.$userCreateSubscription = this.userService.create(this.$userCreate).subscribe(
-        (result)=>{          
-          this.refresh();
+        (result)=>{
+          
+          if(this.$role) this.refresh();
+          else this.reset();
+          
           this.loadingCreate = false;
           this.sweetAlertService.successMsg("Creación Exitosa", "Usuario creado correctamente");
         },
@@ -67,34 +70,4 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   reset(){ this.routeService.goToDashboard('usuarios'); }
   refresh(){ this.loginOutput.emit(false); }
-
-  // updateUser(){
-  //   if(this.InputCorreo.nativeElement.value){
-
-  //     if(this.InputCorreo.nativeElement.value === this.$user.nombre){
-  //       this.loadingUpdate = false;
-  //       this.reset();
-  //     }
-  //     else {
-
-  //       this.$user.nombre = this.InputCorreo.nativeElement.value;
-
-  //       this.userService.update(this.$user, "").subscribe(
-  //         (result)=>{          
-  //           this.reset();
-  //           this.loadingUpdate = false;
-  //           this.sweetAlertService
-  //           .successMsg("Actualización Exitosa", "Categoría actualizada correctamente");
-  //         },
-  //         (error) => {
-  //           this.sweetAlertService.errorMsg(error.error.msg);
-  //           this.loadingUpdate = false;
-  //         });
-  //     }
-  //   }
-  //   else{
-  //     this.loadingUpdate = false;
-  //     this.sweetAlertService.errorMsg("Ingrese Nombre");
-  //   }
-  // }
 }

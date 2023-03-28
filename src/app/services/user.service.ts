@@ -12,6 +12,8 @@ export class UserService {
 
   private api = "api/usuarios/";
 
+  private $user: Usuario;
+
   constructor(private http: HttpClient, private interceptorService: InterceptorService){}
 
   public index(){
@@ -22,15 +24,17 @@ export class UserService {
 
   public create(data: UsuarioCreate){
 
-    console.log(data);
     return this.http.post<{usuario: Usuario}>
     (environment.backendURL + this.api, data);
   }
 
-  public update(data: UsuarioCreate, userId: string){
+  public setUser($user: Usuario){ this.$user = $user; }
+  public getUser(): Usuario { return this.$user; }
+
+  public update(){
 
     return this.http.put<Usuario>
-    (environment.backendURL + this.api + userId, data, this.interceptorService.tokenHeader());
+    (environment.backendURL + this.api + this.$user.uid, this.$user);
   }
 
   public delete(user: Usuario){

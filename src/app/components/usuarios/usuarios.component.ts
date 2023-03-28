@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
+import { RouteService } from 'src/app/services/route.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     ColumnMode = ColumnMode;
     @ViewChild(DatatableComponent) table: DatatableComponent;
   
-    constructor(private userService: UserService){}
+    constructor(private userService: UserService, private routeService: RouteService){}
   
     ngOnInit(){ this.reset(); }
   
@@ -46,7 +47,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     }
   
     edit($row: Usuario){
-      this.editOutput.emit($row);
+      this.userService.setUser($row);
+      this.routeService.goToDashboard("usuarios/actualizar");
     }
   
     delete($row: Usuario){

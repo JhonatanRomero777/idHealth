@@ -9,13 +9,17 @@ import { CreateComponent } from './create/create.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateComponent } from './update/update.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
     UsuariosComponent,
     IndexComponent,
     ActionsComponent,
-    CreateComponent
+    CreateComponent,
+    UpdateComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,

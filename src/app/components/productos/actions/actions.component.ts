@@ -111,8 +111,6 @@ export class ActionsComponent  {
   }
 
   edit(data: {product: Producto, category: Categoria}){
-
-    console.log(data.category);
     
     this.$product = data.product;
 
