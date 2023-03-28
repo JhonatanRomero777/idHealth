@@ -15,7 +15,9 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Categoría" prop="categoria.nombre" headerClass="font-weight-bold">
     </ngx-datatable-column>
-    <ngx-datatable-column name="Opciones" [sortable]="false" headerClass="font-weight-bold">
+
+    <ngx-datatable-column name="Opciones" [sortable]="false" headerClass="font-weight-bold"
+    *ngIf="($role === $adminRole || $userId)">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
             <div class="d-flex" style="gap: 10px;">
                 <button class="btn bg-warning btn-round"

@@ -3,7 +3,11 @@ import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { Subscription } from 'rxjs';
 import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
+import { Usuario } from 'src/app/models/usuario';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-productos',
@@ -20,6 +24,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   $products: Producto[];
 
   private $productsSubscription: Subscription;
+  private $roleSubscription: Subscription;
 
   ColumnMode = ColumnMode;
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -28,11 +33,34 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   $initLoading: boolean;
 
-  constructor(private productService: ProductService){}
+  $role: string;
+  $adminRole: string = environment.roles[0];
 
-  ngOnInit(){ this.reset(); }
+  constructor(private productService: ProductService,
+              private userService:UserService, private authService: AuthService){}
 
-  ngOnDestroy() { if(this.$productsSubscription) this.$productsSubscription.unsubscribe(); }
+  ngOnInit() { 
+    this.$roleSubscription = this.userService.index().subscribe((response)=>{
+
+      if(response.usuarios){
+
+        const val = this.authService.getUser();
+
+        response.usuarios = response.usuarios.filter(function ($user: Usuario) {
+          return $user.uid.toLowerCase().indexOf(val) !== -1 || !val;
+        });
+
+        this.$role = response.usuarios[0].rol;
+      }
+    });
+
+    this.reset();
+  }
+
+  ngOnDestroy() {
+    if(this.$productsSubscription) this.$productsSubscription.unsubscribe();
+    if(this.$roleSubscription) this.$roleSubscription.unsubscribe();
+  }
 
   reset(){
 
