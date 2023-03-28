@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
 import { Usuario } from 'src/app/models/usuario';
+import { Router } from '@angular/router';
 
 declare interface RouteInfo {
   path: string;
@@ -24,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   $menuItems: RouteInfo[] = [
 
     //ALL
-    { path: '/home', title: 'Home', active: true,
+    { path: '/home', title: 'Home', active: false,
       allow: [environment.roles[0], environment.roles[1]] },
   
     { path: '/productos', title: 'Productos', active: false,
@@ -39,11 +40,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ];
 
   private $roleSubscription: Subscription;
+  private $path: any;
 
   constructor(public authService: AuthService, public routeService: RouteService,
-              private userService: UserService){}
+              private userService: UserService, private router: Router){}
 
   ngOnInit(){
+
+    this.$path = new URL(window.location.href).pathname.split("/").reverse()[0];
+    
+    for(let i=0; i<this.$menuItems.length; i++){
+      if(this.$menuItems[i].path == ("/"+this.$path)) this.$menuItems[i].active = true;
+    }
 
     this.$roleSubscription = this.userService.index().subscribe((response)=>{
 
