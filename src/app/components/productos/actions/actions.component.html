@@ -1,0 +1,43 @@
+<div class="row">
+
+    <div class="col-md-12 actions">
+
+        <app-select (categoryOutput)="$category = $event; categoryOutput.emit($event)"></app-select>
+
+        <input class="form-control" type="text" placeholder="Nombre" #productName>
+
+        <button *ngIf="!$product" class="btn btn-success centerBtn"
+            (click)="loadingSearch=true; search(productName.value)">
+            <b> Search </b>
+            <i *ngIf="loadingSearch, else noChargingSearch" class="fa fa-refresh fa-lg fa-spin"></i>
+            <ng-template #noChargingSearch>
+                <i class="fa-lg bi bi-search"></i>
+            </ng-template>
+        </button>
+
+        <button *ngIf="!$product; else updateBtn" class="btn btn-round my-bg-primary centerBtn"
+            (click)="loadingCreate=true; create(productName.value)">
+            Crear
+            <i *ngIf="loadingCreate, else noChargingCreate" class="fa fa-refresh fa-lg fa-spin"></i>
+            <ng-template #noChargingCreate>
+                <i class="fa fa-lg fa-plus"></i>
+            </ng-template>
+        </button>
+
+        <ng-template #updateBtn>
+            <button class="btn btn-round my-bg-primary centerBtn"
+                (click)="loadingUpdate=true; updateProduct()">
+                Actualizar
+                <i *ngIf="loadingUpdate, else noChargingUpdate" class="fa fa-refresh fa-lg fa-spin"></i>
+                <ng-template #noChargingUpdate>
+                    <i class="fa-lg bi bi-pencil-square"></i>
+                </ng-template>
+            </button>
+        </ng-template>
+
+        <button *ngIf="cancelar || $product" class="btn btn-round bg-danger cancel"
+        (click)="reset()">
+            <i class="fa-lg bi bi-slash-circle"></i>
+        </button>
+    </div>
+</div>

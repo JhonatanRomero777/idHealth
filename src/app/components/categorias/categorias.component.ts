@@ -14,11 +14,11 @@ export class CategoriasComponent implements OnInit, OnDestroy {
   @Output() editOutput = new EventEmitter<Categoria>();
   @Output() deleteOutput = new EventEmitter<Categoria>();
 
-  @Input() $userId: string;
-
   $categories: Categoria[];
 
   private $categoriesSubscription: Subscription;
+
+  $initLoading: boolean;
 
   ColumnMode = ColumnMode;
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -27,14 +27,19 @@ export class CategoriasComponent implements OnInit, OnDestroy {
 
   ngOnInit(){ this.reset(); }
 
+  ngOnDestroy() { if(this.$categoriesSubscription) this.$categoriesSubscription.unsubscribe(); }
+
   reset(){
+
+    this.$initLoading = true;
+
     this.$categoriesSubscription = this.categoryService.index()
     .subscribe((result)=>{
       this.$categories = result.categorias.reverse();
+
+      this.$initLoading = false;
     });
   }
-
-  ngOnDestroy() { if(this.$categoriesSubscription) this.$categoriesSubscription.unsubscribe(); }
 
   setCategories($categories: Categoria[]){
     this.$categories = $categories;

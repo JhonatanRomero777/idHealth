@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Categoria } from '../models/categoria';
-import { AuthService } from './auth.service';
+import { InterceptorService } from './interceptor.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,54 +11,37 @@ export class CategoryService {
 
   private api = "api/categorias/";
 
-  constructor(private http: HttpClient, private authService: AuthService){}
+  constructor(private http: HttpClient, private interceptorService: InterceptorService){}
 
   public index(){
-    
-    let params = new HttpParams();
-
-    params = params.append('desde', 0);
-    params = params.append('limite', 0);
 
     return this.http.get<{total: number, categorias: Categoria[]}>
-      (environment.backendURL + this.api, { params: params });
+      (environment.backendURL + this.api, this.interceptorService.allListParameter());
   }
 
   public create($name: string){
-
-    let headers = new HttpHeaders();
-
-    headers = headers.append('x-token', this.authService.getToken());
 
     let data = {
       nombre: $name
     };
 
     return this.http.post<Categoria>
-    (environment.backendURL + this.api, data, {'headers':headers});
+    (environment.backendURL + this.api, data, this.interceptorService.tokenHeader());
   }
 
   public update($category: Categoria){
-
-    let headers = new HttpHeaders();
-
-    headers = headers.append('x-token', this.authService.getToken());
 
     let data = {
       nombre: $category.nombre
     };
 
     return this.http.put<Categoria>
-    (environment.backendURL + this.api + $category._id, data, {'headers':headers});
+    (environment.backendURL + this.api + $category._id, data, this.interceptorService.tokenHeader());
   }
 
   public delete($category: Categoria){
 
-    let headers = new HttpHeaders();
-
-    headers = headers.append('x-token', this.authService.getToken());
-
     return this.http.delete<Categoria>
-    (environment.backendURL + this.api + $category._id, {'headers':headers});
+    (environment.backendURL + this.api + $category._id, this.interceptorService.tokenHeader());
   }
 }

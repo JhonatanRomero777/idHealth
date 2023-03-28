@@ -1,25 +1,25 @@
-
-<app-search></app-search>
-
-<br><br>
-
 <div class="card">
 
     <div class="card-header">
         <div class="row">
-            <div class="col-md-12 text-center title">
-                <h3> Mis Productos </h3>
+            <div class="col-md-12 text-center main_title title">
+                <h3> Productos </h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 myProducts">            
-                <app-select></app-select> <!-- Categorias -->
-                <app-create></app-create>
-            </div>
-        </div>
+
+        <app-actions #productActions [$userId]=""
+        (productOutput)="productIndex.setProductos($event);"
+        (resetOutput)="productIndex.reset()"
+        (categoryOutput)="productIndex.setCategory($event)">
+
+        </app-actions>
+
     </div>
     
     <div class="card-body">
-        <app-productos></app-productos>
+        <app-productos #productIndex [$userId]=""
+        (editOutput)="productActions.edit($event)"
+        (deleteOutput)="productActions.delete($event)">
+        </app-productos>
     </div>
 </div>

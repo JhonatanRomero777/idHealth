@@ -1,4 +1,4 @@
-<ngx-datatable
+<ngx-datatable *ngIf="!$initLoading; else charging"
     class="bootstrap"
     [headerHeight]="50"
     [columnMode]="'force'"
@@ -27,3 +27,11 @@
         </ng-template>
     </ngx-datatable-column>
 </ngx-datatable>
+
+<ng-template #charging>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="lds-dual-ring"></div>
+        </div>
+    </div>
+</ng-template>

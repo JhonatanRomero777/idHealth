@@ -5,11 +5,11 @@ import { SearchService } from 'src/app/services/search.service';
 import { SweetAlertService } from 'src/app/services/sweet.alert.service';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-actions',
+  templateUrl: './actions.component.html',
+  styleUrls: ['./actions.component.css']
 })
-export class CreateComponent  {
+export class ActionsComponent  {
 
   @Output() nameOutput = new EventEmitter<Categoria[]>();
   @Output() resetOutput = new EventEmitter<boolean>();

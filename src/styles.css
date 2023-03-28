@@ -62,3 +62,43 @@ html {
     color: white;
     font-weight: bold;
 }
+
+.actions{
+    display: flex;
+    gap: 20px;
+}
+
+.title{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* LOADER */
+.loader{
+    position: absolute;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid var(--color_primary);
+    border-color: var(--color_primary) transparent var(--color_primary) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

@@ -7,18 +7,18 @@
             </div>
         </div>
 
-        <app-create #createCategory
-        (nameOutput)="indexCategory.setCategories($event);"
-        (resetOutput)="indexCategory.reset()">
+        <app-actions #categoryActions
+        (nameOutput)="categoryIndex.setCategories($event);"
+        (resetOutput)="categoryIndex.reset()">
 
-        </app-create>
+        </app-actions>
 
     </div>
     
     <div class="card-body">
-        <app-categorias #indexCategory
-        (editOutput)="createCategory.edit($event)"
-        (deleteOutput)="createCategory.delete($event)">
+        <app-categorias #categoryIndex
+        (editOutput)="categoryActions.edit($event)"
+        (deleteOutput)="categoryActions.delete($event)">
         </app-categorias>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<ngx-datatable
+<ngx-datatable *ngIf="!$initLoading; else charging"
     class="bootstrap"
     [headerHeight]="50"
     [columnMode]="'force'"
@@ -13,4 +13,29 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Precio" prop="precio" headerClass="font-weight-bold">
     </ngx-datatable-column>
+    <ngx-datatable-column name="Categoría" prop="categoria.nombre" headerClass="font-weight-bold">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Opciones" [sortable]="false" headerClass="font-weight-bold">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div class="d-flex" style="gap: 10px;">
+                <button class="btn bg-warning btn-round"
+                (click)="edit(row, row.categoria)">
+                    <i class="fa-lg bi bi-pencil-square"></i>
+                </button>
+    
+                <button class="btn bg-danger btn-round"
+                (click)="delete(row)">
+                    <i class="fa-lg bi bi-trash"></i>
+                </button>
+            </div>
+        </ng-template>
+    </ngx-datatable-column>
 </ngx-datatable>
+
+<ng-template #charging>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="lds-dual-ring"></div>
+        </div>
+    </div>
+</ng-template>

@@ -1,3 +1,24 @@
-<select class="form-select" name="" id="">
-    <option value="">Seleccione categoría...</option>
-</select>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+        id="dropdownMenuButton"  aria-haspopup="true" aria-expanded="false">
+  
+        <div *ngIf="$category; else notCategory">
+            {{ $category.nombre }}
+        </div>
+
+        <ng-template #notCategory> Seleccione Categoría ... </ng-template>
+
+    </button>
+    
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item"
+        (click)="$category = null; categoryOutput.emit(null)">
+            Seleccione Categoría ...
+        </a>
+
+        <a *ngFor="let category of $categories" class="dropdown-item"
+        (click)="$category = category; categoryOutput.emit(category)">
+            {{ category.nombre }}
+    </a>
+    </div>
+</div>

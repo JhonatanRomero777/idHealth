@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SearchComponent } from './components/search/search.component';
+import { ProductosModule } from './components/productos/productos.module';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,10 @@ import { SearchComponent } from './components/search/search.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ProductosModule
   ],
-  providers: [],
+  providers:[],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

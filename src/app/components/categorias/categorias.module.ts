@@ -5,16 +5,15 @@ import { CategoriasRoutingModule } from './categorias-routing.module';
 import { SelectComponent } from './select/select.component';
 import { CategoriasComponent } from './categorias.component';
 import { IndexComponent } from './index/index.component';
-import { CreateComponent } from './create/create.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { ActionsComponent } from './actions/actions.component';
 
 @NgModule({
   declarations: [
     SelectComponent,
     CategoriasComponent,
     IndexComponent,
-    CreateComponent
+    ActionsComponent
   ],
   imports: [
     CommonModule,
