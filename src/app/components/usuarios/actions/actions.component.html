@@ -12,6 +12,11 @@
             </ng-template>
         </button>
 
+        <button class="btn btn-round my-bg-primary centerBtn"
+        (click)="routeService.goToDashboard('usuarios/crear')">
+            Crear <i class="fa fa-lg fa-plus"></i>
+        </button>
+
         <button *ngIf="cancelar" class="btn btn-round bg-danger cancel"
         (click)="reset()">
             <i class="fa-lg bi bi-slash-circle"></i>

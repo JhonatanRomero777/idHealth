@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-error-msg',
@@ -8,5 +7,4 @@ import { FormControl } from '@angular/forms';
 })
 export class FormErrorMsgComponent {
   @Input() myFormControl: any;
-  @Input() minLengthNumber: number;
 }

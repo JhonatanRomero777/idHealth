@@ -22,8 +22,9 @@ export class UserService {
 
   public create(data: UsuarioCreate){
 
+    console.log(data);
     return this.http.post<{usuario: Usuario}>
-    (environment.backendURL + this.api, data, this.interceptorService.tokenHeader());
+    (environment.backendURL + this.api, data);
   }
 
   public update(data: UsuarioCreate, userId: string){

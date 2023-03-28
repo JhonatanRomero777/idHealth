@@ -7,7 +7,8 @@ import { IndexComponent } from './index/index.component';
 import { ActionsComponent } from './actions/actions.component';
 import { CreateComponent } from './create/create.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     UsuariosRoutingModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    SharedModule
+  ],
+  exports: [
+    CreateComponent
   ]
 })
 export class UsuariosModule { }

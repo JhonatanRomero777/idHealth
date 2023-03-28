@@ -51,6 +51,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     
     for(let i=0; i<this.$menuItems.length; i++){
       if(this.$menuItems[i].path == ("/"+this.$path)) this.$menuItems[i].active = true;
+      else this.$menuItems[i].active = false;
     }
 
     this.$roleSubscription = this.userService.index().subscribe((response)=>{

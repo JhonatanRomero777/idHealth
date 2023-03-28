@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
+import { RouteService } from 'src/app/services/route.service';
 import { SearchService } from 'src/app/services/search.service';
 import { SweetAlertService } from 'src/app/services/sweet.alert.service';
 import { UserService } from 'src/app/services/user.service';
@@ -26,7 +27,7 @@ export class ActionsComponent implements OnDestroy  {
   private $userDeleteSubscription: Subscription;
 
   constructor(private sweetAlertService: SweetAlertService, private searchService: SearchService,
-              private userService: UserService){}
+              private userService: UserService, public routeService: RouteService){}
 
   ngOnDestroy() { if(this.$userSearchSubscription) this.$userSearchSubscription.unsubscribe();
   }

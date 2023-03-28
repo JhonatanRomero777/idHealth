@@ -5,6 +5,7 @@ import { Credentials } from 'src/app/models/credentials';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouteService } from 'src/app/services/route.service';
 import { SweetAlertService } from 'src/app/services/sweet.alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,9 @@ export class LoginComponent implements OnDestroy {
   });
 
   loading: boolean = false;
+  isRegister: boolean = false;
+
+  userRole: string = environment.roles[1];
 
   loginSubscription: Subscription;
 
